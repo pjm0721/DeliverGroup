@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_today"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="홈"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_add"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_group_24"
+        android:title="내 그룹"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_setting"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="내 정보"
+        app:showAsAction="always" />
+</menu>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Signup">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginLeft="5dp"
+        android:text="회원가입 정보"
+        android:fontFamily="@font/maplestorylight"
+        android:textColor="#000000"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signup2_id"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_margin="5dp"
+            android:padding="13dp"
+            android:textSize="17dp"
+            android:inputType="textEmailAddress"
+            android:hint="아이디"  />
+            <RadioGroup
+                android:id="@+id/signup2_grp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <RadioButton
+                    android:id="@+id/signup2_rb"
+                    android:hint="남성"
+                    android:checked="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+               <RadioButton
+                   android:id="@+id/signup2_rb2"
+                    android:hint="여성"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/signup2_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:inputType="textPassword"
+            android:layout_margin="5dp"
+            android:padding="13dp"
+            android:textSize="17dp"
+            android:hint="비밀번호 (영문+숫자+특수문자 조합 8자리 이상)"
+            />
+        <EditText
+            android:id="@+id/signup2_password_chk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_margin="5dp"
+            android:inputType="textPassword"
+            android:padding="13dp"
+            android:textSize="17dp"
+            android:hint="비밀번호 확인"
+            />
+        <EditText
+            android:id="@+id/signup2_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_margin="5dp"
+            android:inputType="phone"
+            android:padding="13dp"
+            android:textSize="17dp"
+            android:hint="전화번호 ( - 없이 )"
+            />
+        <EditText
+            android:id="@+id/signup2_nick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_margin="5dp"
+            android:inputType="textPersonName"
+            android:padding="13dp"
+            android:textSize="17dp"
+            android:hint="닉네임"  />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/signup2_join"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="220dp"
+        android:background="@drawable/border"
+        android:fontFamily="@font/maplestorylight"
+        android:text="가 입 하 기"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

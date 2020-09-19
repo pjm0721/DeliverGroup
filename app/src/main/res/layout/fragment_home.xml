@@ -15,7 +15,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="#000"
-            android:textStyle="bold"
+            android:textSize="20sp"
+            android:fontFamily="@font/maplestorylight"
             android:text="기숙사를 선택해주세요"/>
     </LinearLayout>
     <GridView

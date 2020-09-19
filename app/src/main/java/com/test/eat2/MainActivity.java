@@ -2,12 +2,15 @@ package com.test.eat2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.drm.DrmStore;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -43,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                     case R.id.action_setting: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment_action2).commitAllowingStateLoss();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment_action3).commitAllowingStateLoss();
                         return true;
                     }
                     case R.id.action_add: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment_action3).commitAllowingStateLoss();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment_action2).commitAllowingStateLoss();
                         return true;
                     }
                     default:
@@ -55,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void To_Login() {
+        Intent intent = new Intent(MainActivity.this, Login.class);
+        startActivity(intent);
+    }
+    public void To_Signup(){
+        Intent intent = new Intent(MainActivity.this, Signup.class);
+        startActivity(intent);
     }
 }
 

@@ -45,6 +45,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:text="로그인"
+        android:background="#FFDCDCDC"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,23 +72,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:text="배달의 그룹이 처음이신가요?"
+        android:textColor="#888888"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.588" />
 
-    <TextView
-        android:id="@+id/logintext3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="아이디 찾기   |  비밀번호 찾기"
-        android:textColor="#999999"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.396" />
 
     <Button
         android:id="@+id/login_signup_btn"
@@ -105,35 +95,26 @@
         app:layout_constraintVertical_bias="0.585" />
 
     <Button
-        android:id="@+id/login_findid_btn"
-        android:layout_width="75dp"
-        android:layout_height="18dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.627"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.396" />
-
-    <Button
         android:id="@+id/login_findpwd_btn"
-        android:layout_width="75dp"
-        android:layout_height="21dp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
         android:background="@null"
+        android:text="비밀번호 찾기"
+        android:textColor="#888888"
+        android:layout_marginRight="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintHorizontal_bias="0.979"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.397" />
+        app:layout_constraintVertical_bias="0.398" />
 
     <CheckBox
         android:id="@+id/login_checkBox"
         android:layout_width="100dp"
         android:layout_height="18dp"
         android:text="자동로그인"
-        android:textColor="#999999"
+        android:textColor="#888888"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.096"

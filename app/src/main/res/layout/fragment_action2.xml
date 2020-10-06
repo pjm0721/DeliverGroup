@@ -16,7 +16,7 @@
         android:text="마이 그룹"
         android:textColor="@android:color/black"
         android:fontFamily="@font/maplestorylight"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout">
 
-          <androidx.recyclerview.widget.RecyclerView
+          <ListView
               android:id="@+id/mygroup_view"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -60,11 +60,12 @@
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <ListView
             android:id="@+id/mygroup_view2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

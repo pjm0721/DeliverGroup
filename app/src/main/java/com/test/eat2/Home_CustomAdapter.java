@@ -1,10 +1,11 @@
 package com.test.eat2;
 
+import com.test.eat2.MainActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-
 import java.util.ArrayList;
 
 public class Home_CustomAdapter extends BaseAdapter {
@@ -39,11 +40,10 @@ public class Home_CustomAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent){
         Home_GridItemView view = new Home_GridItemView(mContext);
-        Home_Grid_Item item = data.get(position);
+        final Home_Grid_Item item = data.get(position);
 
         view.setImage(item.getResId());
         view.setTeamName(item.getTeamName());
-
         return view;
         /*
         ImageView imageView;

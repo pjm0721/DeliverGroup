@@ -1,7 +1,9 @@
 package com.test.eat2;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
@@ -10,6 +12,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,11 +27,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import static maes.tech.intentanim.CustomIntent.customType;
 
 public class Signup2 extends AppCompatActivity {
     String MAJOR;
@@ -41,6 +44,9 @@ public class Signup2 extends AppCompatActivity {
     EditText phone;
     EditText nick;
     Button join;
+    private Toolbar toolbar;
+    private ActionBar actionBar;
+    private long backKeyPressedTime = 0;
     RadioGroup Signup2_grp;
     int scs=0;
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
@@ -54,13 +60,19 @@ public class Signup2 extends AppCompatActivity {
         YEAR=intent.getStringExtra("year");
         EMAIL=intent.getStringExtra("email");
         NAME=intent.getStringExtra("name");
-        id=(TextView)findViewById(R.id.signup2_id);
+        id=(TextView) findViewById(R.id.signup2_id);
         id.setText(EMAIL);
         password=(EditText)findViewById(R.id.signup2_password);
         password_chk=(EditText)findViewById(R.id.signup2_password_chk);
         phone=(EditText)findViewById(R.id.signup2_phone);
         nick=(EditText)findViewById(R.id.signup2_nick);
         join=(Button)findViewById(R.id.signup2_join);
+        toolbar = findViewById(R.id.signup2_toolbar);
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);//기본 제목을 없애줍니다.
+        actionBar.setDisplayHomeAsUpEnabled(true);
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,8 +104,38 @@ public class Signup2 extends AppCompatActivity {
                     user.put("닉네임", NICK);
                     user.put("성별",who);
                     db.collection("USER").document(EMAIL).set(user);
+                    finish();
+                    customType(Signup2.this, "right-to-left");
                 }
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                //select back button
+                finish();
+                customType(Signup2.this, "right-to-left");
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        Toast toast;
+        toast = Toast.makeText(this, "초기화", Toast.LENGTH_SHORT);
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            toast = Toast.makeText(this, "회원가입을 종료 하시겠습니까?", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            finish();
+            toast.cancel();
+        }
+        super.onBackPressed();
+        customType(Signup2.this, "right-to-left");
     }
 }

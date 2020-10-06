@@ -102,4 +102,23 @@
         <item>2010</item>
         <item>2009</item>
     </string-array>
+    <string-array name="dormitory">
+        <item>기숙사 선택</item>
+        <item>긍지관</item>
+        <item>누리관</item>
+        <item>봉사관</item>
+        <item>성실관</item>
+        <item>진리관</item>
+        <item>첨성관</item>
+        <item>향토관</item>
+        <item>협동관</item>
+        <item>화목괸</item>
+        <item>명의관</item>
+    </string-array>
+    <string-array name="sex">
+        <item>성별 선택</item>
+        <item>남자</item>
+        <item>여자</item>
+        <item>무관</item>
+    </string-array>
 </resources>

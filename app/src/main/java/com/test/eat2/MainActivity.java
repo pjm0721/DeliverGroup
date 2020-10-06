@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
-
+import static maes.tech.intentanim.CustomIntent.customType;
 import android.content.Intent;
 import android.drm.DrmStore;
 import android.os.Bundle;
@@ -19,11 +19,14 @@ public class MainActivity extends AppCompatActivity {
     Home_Fragment fragment_home;
     Action2_Fragment fragment_action2;
     Action3_Fragment fragment_action3;
-
+    private long backKeyPressedTime = 0;
+    private LoginSharedPreferenceUtil util;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        util = new LoginSharedPreferenceUtil(this);
+        util.setBooleanData("LOGIN",false);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         //프래그먼트 생성
@@ -59,13 +62,46 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void To_Login() {
-        Intent intent = new Intent(MainActivity.this, Login.class);
-        startActivity(intent);
+    public void To_Change_PW(){
+        Intent intent_change_pw=new Intent(getApplicationContext(),ResetPassword.class);
+        intent_change_pw.putExtra("email",util.getStringData("ID",null));
+        startActivity(intent_change_pw);
+        customType(MainActivity.this, "left-to-right");
     }
-    public void To_Signup(){
-        Intent intent = new Intent(MainActivity.this, Signup.class);
+    @Override
+    public void onBackPressed() {
+        Toast toast;
+        toast = Toast.makeText(this, "초기화", Toast.LENGTH_SHORT);
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            toast = Toast.makeText(this, "종료 하시겠습니까?", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            //Boolean goToLogin = util11.getBooleanData("AutoLogin", false);
+//            if(goToLogin) {
+            ActivityCompat.finishAffinity(MainActivity.this);
+//            }
+            finish();
+            toast.cancel();
+        }
+    }
+    public void Logout() {
+        LoginSharedPreferenceUtil util11 = new LoginSharedPreferenceUtil(MainActivity.this);
+        util11.setBooleanData("AutoLogin", false);
+        util11.setStringData("ID", "");
+        Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, Login.class);
+        ActivityCompat.finishAffinity(MainActivity.this);
         startActivity(intent);
+        customType(MainActivity.this, "bottom-to-up");
+    }
+    public void Group(String name){
+        Intent intent3=new Intent(MainActivity.this,GroupListActivity.class);
+        intent3.putExtra("dorm_name",name);
+        startActivity(intent3);
+        customType(MainActivity.this, "left-to-right");
     }
 }
 

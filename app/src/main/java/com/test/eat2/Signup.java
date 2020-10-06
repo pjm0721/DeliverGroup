@@ -1,8 +1,10 @@
 package com.test.eat2;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -15,6 +17,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,15 +29,19 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.SendFailedException;
+
+import static maes.tech.intentanim.CustomIntent.customType;
 
 public class Signup extends AppCompatActivity implements  View.OnClickListener,Dialog.OnCancelListener{
     EditText authEmail;
@@ -51,6 +58,9 @@ public class Signup extends AppCompatActivity implements  View.OnClickListener,D
     String authnumber;
     Spinner major_spinner;
     Spinner year_spinner;
+    private Toolbar toolbar;
+    private ActionBar actionBar;
+    private LoadingDialog l;
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private boolean email_check;
     private boolean email_rp_check;
@@ -86,9 +96,17 @@ public class Signup extends AppCompatActivity implements  View.OnClickListener,D
                     intent.putExtra("email",authEmail.getText().toString());
                     intent.putExtra("name",NAME.getText().toString());
                     startActivity(intent);
+                    customType(Signup.this, "left-to-right");
+                    finish();
                 }
             }
         });
+        toolbar = findViewById(R.id.signup_toolbar);
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);//기본 제목을 없애줍니다.
+        actionBar.setDisplayHomeAsUpEnabled(true);
         NAME=(EditText)findViewById(R.id.signup_name);
         major_spinner=(Spinner)findViewById(R.id.majorspinner);
         year_spinner=(Spinner)findViewById(R.id.yearspinner);
@@ -111,6 +129,17 @@ public class Signup extends AppCompatActivity implements  View.OnClickListener,D
                 // 입력하기 전에
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                //select back button
+                finish();
+                customType(Signup.this, "right-to-left");
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
     public void countDownTimer() { //카운트 다운 메소드
 
@@ -157,6 +186,12 @@ public class Signup extends AppCompatActivity implements  View.OnClickListener,D
         final String email=authEmail.getText().toString();
         switch(v.getId()){
             case R.id.signup_auth_btn:
+                l=new LoadingDialog(Signup.this);
+                l.setLoadingText("로딩중")
+                        .setSuccessText("완료")
+                        .setInterceptBack(true)
+                        .setLoadSpeed(LoadingDialog.Speed.SPEED_ONE)
+                        .show();
                 email_rp_check=true;
                 Log.d("uid", email);
                 email_chk(email);
@@ -174,24 +209,23 @@ public class Signup extends AppCompatActivity implements  View.OnClickListener,D
         }
     }
     private void email_chk(final String Email){
-        db.collection("USER")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("userSign", document.getId() + " => " + document.getData());
-                                if(document.getData().get("email").toString().equals(Email)) email_rp_check = false;
-                            }
-                        } else {
-                            Log.w("userSignError", "Error getting documents.", task.getException());
-                        }
-                        if(email_rp_check)
-                            send_message(Email);
-                        else repeat_email(Email);
+        db.collection("USER").document(Email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        l.close();
+                        repeat_email(Email);
+                    } else {
+                        send_message(Email);
                     }
-                });
+                } else {
+                    Log.d("실패", "get failed with ", task.getException());
+                }
+            }
+        });
+
     }
     private void repeat_email(String Email){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -226,6 +260,7 @@ public class Signup extends AppCompatActivity implements  View.OnClickListener,D
                 authnumber = gMailSender.getEmailCode();
                 //GMailSender.sendMail(제목, 본문내용, 받는사람);
                 gMailSender.sendMail("배달의 그룹 인증 메일입니다.", authnumber, Email);
+                l.close();
                 Toast.makeText(getApplicationContext(), "인증번호를 해당 메일로 전송하였습니다.", Toast.LENGTH_SHORT).show();
                 dialog = LayoutInflater.from(this);
                 dialogLayout = dialog.inflate(R.layout.auth_dialog, null); // LayoutInflater를 통해 XML에 정의된 Resource들을 View의 형태로 반환 시켜 줌
@@ -246,4 +281,9 @@ public class Signup extends AppCompatActivity implements  View.OnClickListener,D
     public void onCancel(DialogInterface dialog) {
         countDownTimer.cancel();
     } //다이얼로그 닫을 때 카운트 다운 타이머의 cancel()메소드 호출
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        customType(Signup.this, "right-to-left");
+    }
 }

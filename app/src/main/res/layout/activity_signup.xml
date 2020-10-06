@@ -4,22 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".Signup">
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/signup_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginLeft="5dp"
-        android:text="회원가입 정보"
-        android:fontFamily="@font/maplestorylight"
-        android:textColor="#000000"
-        android:textSize="25dp"
-        android:textStyle="bold"
+        android:background="@drawable/border_below"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/signup_textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원가입 정보"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -28,7 +31,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/signup_toolbar">
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/majorspinner"
@@ -60,30 +63,37 @@
             android:background="@drawable/border"
             android:inputType="textPersonName"
             android:hint="이름"
+            android:privateImeOptions="defaultInputmode=korean"
             android:padding="13dp"
             android:textSize="17dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
 
             <EditText
                 android:id="@+id/signup_email"
-                android:layout_width="310dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:background="@drawable/border"
                 android:inputType="textEmailAddress"
-                android:hint="knu 이메일 주소"
+                android:hint="학교 이메일 ex) 000@knu.ac.kr"
+                android:layout_weight="5"
                 android:padding="13dp"
                 android:textSize="17dp" />
 
             <Button
                 android:id="@+id/signup_auth_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:layout_marginLeft="15dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:padding="18dp"
+                android:padding="14dp"
+                android:layout_weight="1"
+                android:textColor="#000000"
                 android:text="인증" />
         </LinearLayout>
 
@@ -95,15 +105,15 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="284dp"
         android:background="@drawable/border"
         android:fontFamily="@font/maplestorylight"
         android:text="다 음  ▶"
+        android:layout_marginTop="50dp"
         android:textSize="17dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

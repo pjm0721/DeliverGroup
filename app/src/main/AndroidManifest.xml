@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.test.eat2">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,13 +10,32 @@
         android:icon="@mipmap/icon77"
         android:label="배달의그룹"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Signup2"></activity>
-        <activity android:name=".Signup" />
-        <activity android:name=".Login" />
-        <activity android:name=".MainActivity" />
+        android:theme="@style/AppTheme"
+        tools:replace="android:label">
+        <activity android:name=".ResetPassword" />
+        <activity android:name=".FindPassword" />
+        <activity android:name=".GroupInfoAcitivity" />
+        <activity
+            android:name=".AddGroupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GroupListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Signup2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Signup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StartActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.StatusBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

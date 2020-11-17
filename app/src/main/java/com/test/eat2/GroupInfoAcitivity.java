@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +42,7 @@ public class GroupInfoAcitivity extends AppCompatActivity {
     Button info_Btn;
     Button info_Btn2;
     FirebaseFirestore db;
+    private String pakagename;
     LoginSharedPreferenceUtil util;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class GroupInfoAcitivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         info_Btn2=(Button)findViewById(R.id.info_btn2);
         info_Btn=(Button)findViewById(R.id.info_btn);
+        pakagename="com.kakao.talk";
         info_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +81,16 @@ public class GroupInfoAcitivity extends AppCompatActivity {
                                 users.put("ID",util.getStringData("ID",null));
                                 db.collection("GROUP").document(intent.getStringExtra("그룹넘버")).collection("users").document(util.getStringData("ID",null)).set(users);
                                 startActivity(intent_kakao);
+                              /*  try{
+                                    Intent intent = getPackageManager().getLaunchIntentForPackage(pakagename);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }
+                                catch (Exception e1){
+                                    String url = "market://details?id=" + pakagename;
+                                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                    startActivity(i);
+                                }*/
                             }
                             else {
                                 Toast.makeText(GroupInfoAcitivity.this,"이미 완료된 그룹입니다",Toast.LENGTH_SHORT).show();
@@ -163,4 +177,5 @@ public class GroupInfoAcitivity extends AppCompatActivity {
         super.onBackPressed();
         customType(GroupInfoAcitivity.this, "right-to-left");
     }
+
 }

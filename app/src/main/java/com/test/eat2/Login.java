@@ -121,11 +121,11 @@ public class Login extends AppCompatActivity {
     private void login() {
         final String idtext = id.getText().toString();
         final String pwtext = password.getText().toString();
-        final DocumentReference docRef = db.collection("USER").document(idtext);
         if (idtext.isEmpty() == true || pwtext.isEmpty() == true) {
             Toast.makeText(this, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_LONG).show();
             return;
         } else {
+            final DocumentReference docRef = db.collection("USER").document(idtext);
             docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot snapshot,
